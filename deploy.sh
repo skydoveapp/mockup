@@ -5,6 +5,6 @@ rm -rf .gitignore
 gulp build
 git add dist
 git commit -a -m "sync master"
-git subtree push --prefix dist origin gh-pages
+git push origin `git subtree split --prefix dist gh-pages`:gh-pages --force
 git checkout master
 bower install
