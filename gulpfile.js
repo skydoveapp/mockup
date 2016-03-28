@@ -80,11 +80,19 @@ gulp.task('fonts', function () {
         .pipe($.size());
 });
 
+gulp.task('vender', function () {
+    return gulp.src('./bower.json')
+        .pipe(mainBowerFiles())
+        .pipe($.filter('**/*.{eot,svg,ttf,woff,TTF,EOT,SVG,WOFF}'))
+        .pipe(gulp.dest('dist/vender'))
+        .pipe($.size());
+});
+
 gulp.task('clean', function () {
     return gulp.src(['app/styles/main.css', 'dist'], { read: false }).pipe($.clean());
 });
 
-gulp.task('build', ['html', 'miscellaneous', 'icons', 'images', 'fonts']);
+gulp.task('build', ['html', 'miscellaneous', 'icons', 'images', 'fonts', 'vender']);
 
 gulp.task('default', ['clean'], function () {
     gulp.start('build');
